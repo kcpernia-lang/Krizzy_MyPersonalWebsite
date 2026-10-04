@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Website - Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('Assets/Pink & White Watercolor Floral Background Desktop Wallpaper.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #fbcfe8;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      width: 100%;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .brand span {
+      color: #ec4899;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-menu a {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #4b5563;
+      padding-bottom: 4px;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: #db2777;
+      border-bottom: 3px solid #ec4899;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 98%;
+      max-width: 1600px;
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border: 2px solid #fbcfe8;
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.1);
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      color: #db2777;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+
+    
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      background-color: #ffffff;
+      border: 2px solid #fbcfe8;
+      color: #4b5563;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background-color: #ec4899;
+      color: #ffffff;
+      border-color: #ec4899;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background-color: #ffffff;
+      border: 2px solid #fbcfe8;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(236, 72, 153, 0.2);
+      border-color: #ec4899;
+    }
+
+    .project-card-image {
+      width: 100%;
+      height: 200px;
+      background-color: #fce7f3;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-card-image img {
+      transform: scale(1.05);
+    }
+
+    .project-card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      color: #1f2937;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.95rem;
+      color: #4b5563;
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      background-color: #fdf2f8;
+      color: #db2777;
+      border: 1px solid #fbcfe8;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .view-btn {
+      align-self: flex-start;
+      color: #ec4899;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .project-card:hover .view-btn {
+      color: #db2777;
+      text-decoration: underline;
+    }
+
+   
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-box {
+      background-color: #ffffff;
+      border: 2px solid #fbcfe8;
+      border-radius: 16px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      color: #9ca3af;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-close:hover {
+      color: #ec4899;
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      color: #db2777;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 1rem 0;
+      border: 1px solid #fbcfe8;
+    }
+
+    .modal-desc {
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    footer {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid #fbcfe8;
+      text-align: center;
+      padding: 1.2rem;
+      color: #6b7280;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="brand">Authornim<span>Krizzy</span></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      
+      <div class="page-header">
+        <h1 class="page-title">Featured Projects</h1>
+        <p class="page-subtitle">A showcase of software applications, web designs, and academic projects.</p>
+      </div>
+
+      
+      <div class="filter-container">
+        <button class="filter-btn active" onclick="filterProjects('all', this)">All Projects</button>
+        <button class="filter-btn" onclick="filterProjects('java', this)">Java & OOP</button>
+        <button class="filter-btn" onclick="filterProjects('cpp', this)">Data Structures & C++</button>
+        <button class="filter-btn" onclick="filterProjects('web', this)">Web Apps</button>
+      </div>
+
+      
+      <div class="projects-grid">
+        
+        
+        <div class="project-card" data-category="java" onclick="openProjectModal('studyflow')">
+          <div class="project-card-image">
+            <img src="Assets/Studyflow.png" alt="StudyFlow Application">
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">StudyFlow</h3>
+            <p class="project-desc">A desktop student productivity suite built with Java Swing featuring session timers, study analytics, and flashcard review systems.</p>
+            <div class="tech-tags">
+              <span class="tag">Java</span>
+              <span class="tag">Swing GUI</span>
+              <span class="tag">OOP</span>
+            </div>
+            <span class="view-btn">View Details &rarr;</span>
+          </div>
+        </div>
+
+        
+        <div class="project-card" data-category="cpp" onclick="openProjectModal('chatbot')">
+          <div class="project-card-image">
+            <img src="Assets/Grocery Chatbot.png" alt="Grocery Store Chatbot">
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">C++ Grocery Chatbot</h3>
+            <p class="project-desc">A CLI-based grocery store assistant utilizing low-level data structures including linked lists, stacks, queues, and sorting algorithms.</p>
+            <div class="tech-tags">
+              <span class="tag">C++</span>
+              <span class="tag">Data Structures</span>
+              <span class="tag">Algorithms</span>
+            </div>
+            <span class="view-btn">View Details &rarr;</span>
+          </div>
+        </div>
+
+        
+        <div class="project-card" data-category="web" onclick="openProjectModal('pinoypride')">
+          <div class="project-card-image">
+            <img src="Assets/PinoyprideBBP.jpg" alt="Pinoy Pride Bato-Bato Piks">
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">Pinoy Pride: Bato-Bato Piks</h3>
+            <p class="project-desc">A strategic web game expanding traditional gameplay into a multi-option decision hierarchy with interactive UI animations.</p>
+            <div class="tech-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Game Logic</span>
+              <span class="tag">UI/UX</span>
+            </div>
+            <span class="view-btn">View Details &rarr;</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  
+  <div id="projectModal" class="modal-overlay" onclick="closeProjectModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <span class="modal-close" onclick="closeProjectModal()">&times;</span>
+      <h2 id="m-title" class="modal-title">Project Details</h2>
+      <div id="m-tags" class="tech-tags"></div>
+      <img id="m-image" class="modal-image" src="" alt="Project Preview">
+      <p id="m-desc" class="modal-desc"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Krizzy Anne C. Pernia. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    
+    const projectData = {
+      studyflow: {
+        title: "StudyFlow Desktop Suite",
+        image: "Assets/Pic1.jpg",
+        tags: ["Java", "Swing GUI", "OOP", "Productivity"],
+        description: "StudyFlow is a comprehensive Java desktop productivity system built with Object-Oriented Programming principles. It provides custom session timers, study flashcard management, attendance monitoring, and visual productivity analytics designed to optimize daily academic workflows."
+      },
+      chatbot: {
+        title: "C++ Grocery Store Chatbot",
+        image: "Assets/Pic2.jpg",
+        tags: ["C++", "Data Structures", "Linked Lists", "Sorting"],
+        description: "A procedural programming project that simulates an automated grocery shopping assistant. Implements fundamental data structures such as linked lists for cart management, stacks/queues for transaction processing, and Bubble Sort/Linear Search for dynamic inventory lookup."
+      },
+      pinoypride: {
+        title: "Pinoy Pride (Bato-Bato Piks)",
+        image: "Assets/Pic3.jpg",
+        tags: ["JavaScript", "CSS3", "Game Architecture", "Web App"],
+        description: "An extended web-based strategic game modeling a expanded decision matrix inspired by traditional Filipino games. Features dynamic state comparisons, custom animations, and responsive score tracking."
+      }
+    };
+
+    
+    function filterProjects(category, btnElement) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-category');
+        if (category === 'all' || categories.includes(category)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal Control Functions
+    function openProjectModal(key) {
+      const data = projectData[key];
+      if (!data) return;
+
+      document.getElementById('m-title').innerText = data.title;
+      document.getElementById('m-image').src = data.image;
+      document.getElementById('m-desc').innerText = data.description;
+
+      const tagsContainer = document.getElementById('m-tags');
+      tagsContainer.innerHTML = '';
+      data.tags.forEach(tagText => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.innerText = tagText;
+        tagsContainer.appendChild(span);
+      });
+
+      const modal = document.getElementById('projectModal');
+      modal.classList.add('show');
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.remove('show');
+    }
+
+    
+    function highlightActiveNavLink() {
+      const currentPath = window.location.pathname.split('/').pop() || 'portfolio.html';
+      const navLinks = document.querySelectorAll('.nav-menu a');
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPath || (currentPath === 'portfolio.html' && href === 'portfolio.html')) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeProjectModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', highlightActiveNavLink);
+  </script>
+</body>
+</html>
